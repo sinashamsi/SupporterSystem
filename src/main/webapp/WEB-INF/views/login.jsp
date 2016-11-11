@@ -41,7 +41,7 @@
                         <div class="col-sm-12">
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox"> Remember me
+                                    <label><input type="checkbox" id="rememberme" name="remember-me"> Remember Me</label>
                                 </label>
                             </div>
                         </div>
