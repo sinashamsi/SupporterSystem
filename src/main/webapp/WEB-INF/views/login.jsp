@@ -1,59 +1,140 @@
-<%@ page session="false" trimDirectiveWhitespaces="true" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="datatables" uri="http://github.com/dandelion/datatables" %>
-<%@ taglib prefix="DSS" tagdir="/WEB-INF/tags" %>
-<%@ page contentType="text/html" pageEncoding="utf-8" %>
+<html>
+<head>
+    <spring:url value="/resources/jquery/jquery.min.js" var="jQuery"/>
+    <script src="${jQuery}"></script>
+    <spring:url value="/resources/bootstrap/dist/js/bootstrap.min.js" var="bootstrapJs"/>
+    <script src="${bootstrapJs}"></script>
 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<DSS:layout pageName="login">
+    <spring:url value="/resources/css/font-awesome.min.css" var="fontStyle"/>
+    <link href="${fontStyle}" rel="stylesheet"/>
+    <spring:url value="/resources/css/loginStyle.css" var="loginStyle"/>
+    <link href="${loginStyle}" rel="stylesheet"/>
+    <spring:url value="/resources/bootstrap/css/bootstrap.min.css" var="bootstrapStyle"/>
+    <link href="${bootstrapStyle}" rel="stylesheet"/>
+
+    <title>Support System Login Page</title>
+
+</head>
+<body>
+<div class="view">
     <div class="container">
+        <div class="row top-buffer">
+            <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
+                <i class="fa fa-arrows" aria-hidden="true" style="color:#1DEDEB;"></i>
+                <span class="h3-responsive" style="color: #1DEDEB">Supporter System</span>
+            </div>
+        </div>
         <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
-                <form class="form-horizontal" method="post">
-                    <c:if test="${param.error != null}">
-                        <div class="alert alert-danger">
-                            <p>Invalid username and password.</p>
-                        </div>
-                    </c:if>
-                    <c:if test="${param.logout != null}">
-                        <div class="alert alert-success">
-                            <p>You have been logged out successfully.</p>
-                        </div>
-                    </c:if>
-                    <div class="form-group">
-                        <label for="username" class="col-sm-3 control-label">Username</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username" required>
-                        </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-md-offset-1 col-lg-offset-1">
+                <div id="login-form">
+                    <div class="modal-body">
+                        <form class="form center-block">
+                            <c:if test="${param.error != null}">
+                            <div class="alert alert-danger">
+                                <p>Invalid username and password.</p>
+                            </div>
+                            </c:if>
+                            <c:if test="${param.logout != null}">
+                                <div class="alert alert-success">
+                                    <p>You have been logged out successfully.</p>
+                                </div>
+                            </c:if>
+                            <div class="form-group">
+                                <span class="glyphicons glyphicons-user"></span>
+                                <input type="text" class="form-control input-lg input-login-form"
+                                       placeholder="Username">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control input-lg input-login-form"
+                                       placeholder="Password">
+                            </div>
+                            <div class="form-group">
+                                <button id="sign-in" class="btn btn-primary btn-lg btn-block input-login-form">Log In
+                                </button>
+                            </div>
+                            <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
+                            <div class="form-group">
+                                <div class="checkbox" id="remember-me">
+                                    <input type="checkbox" id="rememberme" name="remember-me"> Remember Me
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <label for="password" class="col-sm-3 control-label">Password</label>
-                        <div class="col-sm-9">
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required>
-                        </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-5 col-lg-5 col-md-offset-1 col-lg-offset-1">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <span style="color: #fff;font-size: 13px;">
+                          A decision support system (DSS) is a computer-based information system that supports business or organizational decision-making activities. DSSs serve the management, operations, and planning levels of an organization (usually mid and higher management) and help people make decisions about problems that may be rapidly changing and not easily specified in advance.
+                      </span>
                     </div>
-                    <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
-
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <div class="checkbox">
-                                <label>
-                                    <label><input type="checkbox" id="rememberme" name="remember-me"> Remember Me</label>
-                                </label>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <img src="/resources/images/secu02.png">
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        Access Control
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <img src="/resources/images/image006.png">
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        User Base
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <img src="/resources/images/secu02.png">
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        Operation System
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <input type="submit" class="btn btn-default">
-                        </div>
-                    </div>
-                </form>
+                </div>
             </div>
-            <div class="col-md-4"></div>
+        </div>
+        <div class="row footer-inside">
+            <div class="col-xs-12 col-sm-6 col-md-7 col-lg-7">
+                      <span style="color: #fff;font-size: 13px;">
+                        Dotin is a leading provider of SOA-based multi-channel software products for banks and financial services insitutions. Dotin has vast experience in implementing successful solutions for some of the biggest banks in Iran.</span>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-5 col-lg-5">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right" style="color: #fff">Follow Us Here</div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 ">
+                        <i class="fa fa-linkedin-square fa-2x" aria-hidden="true" style="color:#1DEDEB;"></i>
+                        <i class="fa fa-twitter-square fa-2x" aria-hidden="true" style="color:#1DEDEB;"></i>
+                        <i class="fa fa-facebook-square fa-2x" aria-hidden="true" style="color:#1DEDEB;"></i>
+                        <i class="fa fa-google-plus-square fa-2x" aria-hidden="true" style="color:#1DEDEB;"></i>
+                        <i class="fa fa-instagram fa-2x" aria-hidden="true" style="color:#1DEDEB;"></i>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</DSS:layout>
+</div>
+
+
+</body>
+</html>

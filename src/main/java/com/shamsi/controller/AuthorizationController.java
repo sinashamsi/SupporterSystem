@@ -42,7 +42,7 @@ public class AuthorizationController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginPage() {
-		return "login-new";
+		return "login";
 	}
 
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
