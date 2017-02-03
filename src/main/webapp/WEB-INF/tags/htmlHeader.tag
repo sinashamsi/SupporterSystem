@@ -11,5 +11,4 @@
     <link rel="shortcut icon" type="image/x-icon" href="${favicon}">
 
     <title>Sina Shamsi Spring Project</title>
-
 </head>

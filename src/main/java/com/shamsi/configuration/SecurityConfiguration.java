@@ -40,11 +40,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/**/firstLevel/**", "/", "/welcome").access("hasRole('Customer_Supporter') or hasRole('Technical_Customer_Supporter') or hasRole('Developer') or  hasRole('Designer') or hasRole('DBA') or hasRole('Admin')")
-                .antMatchers("/**/secondLevel/**").access("hasRole('Technical_Customer_Supporter') or hasRole('Developer') or  hasRole('Designer') or hasRole('DBA') or hasRole('Admin') ")
-                .antMatchers("/**/thirdLevel/**").access("hasRole('Developer') or  hasRole('Designer') or hasRole('DBA') or hasRole('Admin')")
-                .antMatchers("/**/fourthLevel/**").access("hasRole('Designer') or hasRole('DBA') or hasRole('Admin')")
-                .antMatchers("/**/fifthLevel/**").access("hasRole('DBA') or hasRole('Admin')")
+                .antMatchers("/**/firstLevel/**", "/", "/welcome").access("hasRole('Customer_Supporter') or hasRole('Technical_Customer_Supporter') or hasRole('Developer') or  hasRole('Designer') or hasRole('DBA') or hasRole('ADMIN')")
+                .antMatchers("/**/secondLevel/**").access("hasRole('Technical_Customer_Supporter') or hasRole('Developer') or  hasRole('Designer') or hasRole('DBA') or hasRole('ADMIN') ")
+                .antMatchers("/**/thirdLevel/**").access("hasRole('Developer') or  hasRole('Designer') or hasRole('DBA') or hasRole('ADMIN')")
+                .antMatchers("/**/fourthLevel/**").access("hasRole('Designer') or hasRole('DBA') or hasRole('ADMIN')")
+                .antMatchers("/**/fifthLevel/**").access("hasRole('DBA') or hasRole('ADMIN')")
                 .antMatchers("/**/sixthLevel/**").access("hasRole('ADMIN')")
                 .and().formLogin().loginPage("/login").successHandler(customSuccessHandler)
                 .usernameParameter("username").passwordParameter("password")

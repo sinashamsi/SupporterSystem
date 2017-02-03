@@ -36,7 +36,7 @@
             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-md-offset-1 col-lg-offset-1">
                 <div id="login-form">
                     <div class="modal-body">
-                        <form class="form center-block">
+                        <form  action="/login" class="form center-block" method="post">
                             <c:if test="${param.error != null}">
                             <div class="alert alert-danger">
                                 <p>Invalid username and password.</p>
@@ -49,16 +49,13 @@
                             </c:if>
                             <div class="form-group">
                                 <span class="glyphicons glyphicons-user"></span>
-                                <input type="text" class="form-control input-lg input-login-form"
-                                       placeholder="Username">
+                                <input type="text" class="form-control input-lg input-login-form" name="username" placeholder="Username">
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control input-lg input-login-form"
-                                       placeholder="Password">
+                                <input type="password" class="form-control input-lg input-login-form" placeholder="Password" name="password">
                             </div>
                             <div class="form-group">
-                                <button id="sign-in" class="btn btn-primary btn-lg btn-block input-login-form">Log In
-                                </button>
+                                <button id="sign-in" class="btn btn-primary btn-lg btn-block input-login-form">Log In</button>
                             </div>
                             <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
                             <div class="form-group">
