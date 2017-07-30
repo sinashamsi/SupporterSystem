@@ -24,7 +24,7 @@ body,
     border-radius: 5px;
 }
 
-#sign-in {
+.form-submit-button {
     background-color: #2E4E67 !important;
 
 }

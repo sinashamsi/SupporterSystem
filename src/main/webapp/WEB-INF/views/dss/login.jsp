@@ -21,7 +21,20 @@
     <link href="${bootstrapStyle}" rel="stylesheet"/>
 
     <title>Support System Login Page</title>
-
+    <script>
+        function registerUser() {
+            var registerForm = document.getElementById("registerForm");
+            var loginForm = document.getElementById("loginForm");
+            registerForm.style.display = "";
+            loginForm.style.display = "none";
+        }
+        function loginUser() {
+            var registerForm = document.getElementById("registerForm");
+            var loginForm = document.getElementById("loginForm");
+            registerForm.style.display = "none";
+            loginForm.style.display = "";
+        }
+    </script>
 </head>
 <body>
 <div class="view">
@@ -36,7 +49,7 @@
             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-md-offset-1 col-lg-offset-1">
                 <div id="login-form">
                     <div class="modal-body">
-                        <form  action="/login" class="form center-block" method="post">
+                        <form  action="/login" class="form center-block" method="post" id="loginForm">
                             <c:if test="${param.error != null}">
                             <div class="alert alert-danger">
                                 <p>Invalid username and password.</p>
@@ -47,6 +60,11 @@
                                     <p>You have been logged out successfully.</p>
                                 </div>
                             </c:if>
+                            <c:if test="${registerStatus != null}">
+                                <div class="alert alert-success">
+                                    <p><c:out value="${registerStatus} Please Login"/></p>
+                                </div>
+                            </c:if>
                             <div class="form-group">
                                 <span class="glyphicons glyphicons-user"></span>
                                 <input type="text" class="form-control input-lg input-login-form" name="username" placeholder="Username">
@@ -55,13 +73,41 @@
                                 <input type="password" class="form-control input-lg input-login-form" placeholder="Password" name="password">
                             </div>
                             <div class="form-group">
-                                <button id="sign-in" class="btn btn-primary btn-lg btn-block input-login-form">Log In</button>
+                                <button class="btn btn-primary btn-lg btn-block input-login-form form-submit-button">Log In</button>
                             </div>
                             <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
                             <div class="form-group">
                                 <div class="checkbox" id="remember-me">
                                     <input type="checkbox" id="rememberme" name="remember-me"> Remember Me
                                 </div>
+                            </div>
+                            <div>
+                                <a id="sing-up"  onclick="registerUser();">Register in DSS</a>
+                            </div>
+                        </form>
+
+                        <form  action="/register" class="form center-block" method="post" id="registerForm" style="display: none">
+                            <div class="form-group">
+                                <input type="text" class="form-control input-lg input-login-form" name="firstName" placeholder="FirstName" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control input-lg input-login-form" name="lastName" placeholder="LastName" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control input-lg input-login-form" placeholder="Email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control input-lg input-login-form" name="userName" placeholder="Username" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control input-lg input-login-form" placeholder="Password" name="passWord" required>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-primary btn-lg btn-block input-login-form form-submit-button">Sign Up</button>
+                            </div>
+                            <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
+                            <div>
+                                <a id="sing-in"  onclick="loginUser();">Login in DSS</a>
                             </div>
                         </form>
                     </div>
@@ -131,7 +177,5 @@
         </div>
     </div>
 </div>
-
-
 </body>
 </html>

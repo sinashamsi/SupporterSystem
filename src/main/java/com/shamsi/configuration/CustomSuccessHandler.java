@@ -50,7 +50,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler{
 		} else if (isNormalUser(roles)) {
 			url = "/home";
 		} else {
-			url="/accessDenied";
+			url="/Access_Denied";
 		}
 
 		return url;
@@ -64,7 +64,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler{
     }
 
     private boolean isNormalUser(List<String> roles) {
-        if (roles.contains("ROLE_Customer_Supporter") || roles.contains("ROLE_Technical_Customer_Supporter") || roles.contains("ROLE_Developer") || roles.contains("ROLE_Designer")) {
+        if (roles.contains("ROLE_USER") || roles.contains("ROLE_Customer_Supporter") || roles.contains("ROLE_Technical_Customer_Supporter") || roles.contains("ROLE_Developer") || roles.contains("ROLE_Designer")) {
             return true;
         }
         return false;

@@ -1,11 +1,16 @@
 package com.shamsi.controller.authorization;
 
+import com.shamsi.model.User;
+import com.shamsi.service.UserService;
+import com.shamsi.valueObject.UserRegisterInfoVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -14,7 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class AuthorizationController {
-
+    @Autowired
+    UserService userService;
 	
 	@RequestMapping(value = { "/", "/home","admin","db" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model) {
@@ -41,6 +47,17 @@ public class AuthorizationController {
 		}
 		return "redirect:/login?logout";
 	}
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public String register(@ModelAttribute UserRegisterInfoVO userRegisterInfoVO, ModelMap model) {
+        User user = userService.registerUser(userRegisterInfoVO);
+        String registerStatus = "";
+        if (user != null) {
+            registerStatus = "Register Successfully";
+        }
+        model.addAttribute("registerStatus",registerStatus);
+        return "dss/login";
+    }
 
 	private String getPrincipal(){
 		String userName = null;
